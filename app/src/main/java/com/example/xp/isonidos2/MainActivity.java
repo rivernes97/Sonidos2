@@ -5,6 +5,7 @@ import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -26,13 +27,13 @@ public class MainActivity extends AppCompatActivity {
         principal.addView(auxiliar);
 
         Field[] listaCanciones = R.raw.class.getFields();
-
+        int columnas = 5;
         for (int i=0; i< listaCanciones.length; i++) {
             //creamos un botón por código y lo añadimos a la pantalla principal
             Button b = creaBoton(i, listaCanciones);
             //añadimos el botón al layout
             auxiliar.addView(b);
-            if ( i % 3 == 2){
+            if ( i % columnas == columnas-1){
                 auxiliar = creaLineaBotones(i);
                 principal.addView(auxiliar);
             }
@@ -62,6 +63,8 @@ public class MainActivity extends AppCompatActivity {
     private Button creaBoton(int i, Field[] _listaCanciones){
         LinearLayout.LayoutParams parametrosBotones = new LinearLayout.LayoutParams(0,LinearLayout.LayoutParams.MATCH_PARENT);
         parametrosBotones.weight = 1;
+        parametrosBotones.setMargins(5, 5, 5, 5);
+        parametrosBotones.gravity = Gravity.CENTER_HORIZONTAL;
         Button b = new Button(this);
         b.setLayoutParams(parametrosBotones);
         b.setText(_listaCanciones[i].getName());
