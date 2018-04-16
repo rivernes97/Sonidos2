@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        LinearLayout principal =  findViewById(R.id.botones);
+        LinearLayout principal =  (LinearLayout) findViewById(R.id.botones);
 
         //añado el view del video
 
