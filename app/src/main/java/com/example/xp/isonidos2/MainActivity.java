@@ -9,6 +9,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.VideoView;
 
 import java.lang.reflect.Field;
 
@@ -22,6 +23,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         LinearLayout principal =  findViewById(R.id.botones);
+
+        //añado el view del video
+
+//        VideoView v = new VideoView(this);
+//        v.setId(333+1);
+//        v.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,255));
+//        principal.addView(v);
+
         int numeroLinea = 0;
         LinearLayout auxiliar = creaLineaBotones(numeroLinea);
         principal.addView(auxiliar);
@@ -46,6 +55,16 @@ public class MainActivity extends AppCompatActivity {
         MediaPlayer m = new MediaPlayer();
         m = MediaPlayer.create(this, (int)findViewById(view.getId()).getTag());
         m.start();
+        m.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                mediaPlayer.stop();
+                if (mediaPlayer != null) {
+                    mediaPlayer.release();
+                }
+
+            }
+        });
     }
 
     private LinearLayout creaLineaBotones(int numeroLinea){
